@@ -3,5 +3,13 @@
 https://hub.docker.com/r/beardoverflow/php53
 
 ```
-docker run beardoverflow/php53 -p 80:80 -v $(pwd):/var/www
+cat << EOF > index.php
+<?php
+  phpinfo();
+?>
+EOF
+
+docker run -p 80:80 -v $(pwd):/var/www beardoverflow/php53
 ```
+
+Open http://localhost:80/index.php
