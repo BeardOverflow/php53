@@ -6,6 +6,9 @@ RUN debootstrap --foreign --arch=i386 squeeze /rootfs
 FROM scratch AS chroot
 COPY --from=builder /rootfs /
 RUN /debootstrap/debootstrap --second-stage
+RUN echo 'deb http://archive.debian.org/debian squeeze-lts main' >/etc/apt/sources.list.d/lts.list
+RUN apt-get update && apt-get dist-upgrade --yes --force-yes && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM scratch
 COPY --from=chroot / /

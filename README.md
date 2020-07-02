@@ -13,3 +13,9 @@ docker run -p 80:80 -v $(pwd):/var/www beardoverflow/php53
 ```
 
 Open http://localhost:80/index.php
+
+---
+
+Based on Debian Squeeze LTS
+
+https://wiki.debian.org/DebianSqueeze
