@@ -9,9 +9,12 @@ RUN /debootstrap/debootstrap --second-stage
 
 FROM scratch
 COPY --from=chroot / /
-RUN apt-get update
-RUN apt-get install --yes --force-yes curl git nano tar wget
-RUN apt-get install --yes --force-yes apache2 php5 libapache2-mod-php5 php5-curl php5-gd php5-mssql php5-mysql freetds-bin tdsodbc unixodbc
+RUN apt-get update && apt-get install --yes --force-yes \
+    curl git nano tar wget \
+    apache2 php5 libapache2-mod-php5 \
+    php5-curl php5-gd php5-mssql php5-mysql \
+    freetds-bin tdsodbc unixodbc && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 80
 WORKDIR /var/www
